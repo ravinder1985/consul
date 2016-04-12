@@ -1,0 +1,7 @@
+---
+# tasks file for consul_startup
+
+- include: consul_server.yml
+  become: yes
+  become_method: sudo
+  tags: server

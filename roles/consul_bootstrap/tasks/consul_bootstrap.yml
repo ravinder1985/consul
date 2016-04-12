@@ -1,0 +1,9 @@
+---
+
+- name: START AS BOOTSTRAP
+  shell: /etc/consul.d/init_consul.sh start bootstrap
+  register: result
+
+- name: TEST
+  debug:
+    var: result

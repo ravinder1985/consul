@@ -1,0 +1,8 @@
+---
+
+- include: install_package.yml
+  become: yes
+  become_method: sudo
+- include: consul.yml
+  become: yes
+  become_method: sudo

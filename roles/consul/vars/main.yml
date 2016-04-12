@@ -1,0 +1,7 @@
+consul:
+  agent_zip: https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
+  webui_zip: https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_web_ui.zip
+  dest: /tmp/
+  agent_zip_name: consul_0.6.4_linux_amd64.zip
+  webui_zip_name: consul_0.6.4_web_ui.zip
+  path: /usr/bin

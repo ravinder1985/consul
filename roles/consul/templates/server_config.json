@@ -1,0 +1,9 @@
+{
+    "server": true,
+    "datacenter": "COMCAST_DC1",
+    "data_dir": "/var/consul",
+    "encrypt": "bd48o/p+p6OWNMmyLU7Ktg==",
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "start_join": ["192.168.33.10"]
+}

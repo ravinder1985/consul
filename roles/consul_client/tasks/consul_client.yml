@@ -1,0 +1,4 @@
+---
+
+- name: START AS CLIENT
+  shell: /etc/consul.d/init_consul.sh start client
