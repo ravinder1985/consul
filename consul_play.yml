@@ -1,0 +1,18 @@
+---
+
+- hosts: allservers
+  roles:
+    - consul
+    - consul_web
+- hosts: allservers
+  roles:
+    - consul_status
+- hosts: bootstrap
+  roles:
+    - consul_bootstrap
+- hosts: server
+  roles:
+    - consul_server
+- hosts: client
+  roles:
+    - consul_client

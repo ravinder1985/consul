@@ -1,0 +1,8 @@
+---
+# vars file for consul_web
+
+consul_web:
+  zip: https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_web_ui.zip
+  dest: /home/consul/dest
+  home: /home/consul/
+  zip_name: consul_0.6.4_web_ui.zip

@@ -1,0 +1,13 @@
+---
+
+- name: ADD CONSUL USER
+  user: name=consul
+- name: MAKE SURE DIR STRUCTURE EXIST
+  file: path={{ item }} state=directory mode=0755 owner=consul group=consul
+  with_items:
+     - /home/consul
+     - /home/consul/dest
+- name: GET CONSUL WEB ZIP FILE
+  get_url: url={{ consul_web.zip }} dest={{ consul_web.home }} validate_certs=False
+- name: UNZIP AND COPY THE BINERY TO /home/consul/dest
+  unarchive: src={{ consul_web.home }}{{ consul_web.zip_name }} dest={{ consul_web.dest }} copy=no 

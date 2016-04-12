@@ -1,0 +1,10 @@
+---
+
+- name: CHECK STATUS
+  shell: /etc/consul.d/init_consul.sh status
+  register: result
+  ignore_errors: True
+
+- name: TEST
+  debug:
+    var: result

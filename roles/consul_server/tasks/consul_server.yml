@@ -1,0 +1,4 @@
+---
+
+- name: START AS SERVER
+  shell: /etc/consul.d/init_consul.sh start server
