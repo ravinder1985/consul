@@ -25,7 +25,9 @@ PIDFILES=/var/run
 APPNAME=consul
 LOGFILES=/var/log
 LOG=${LOGFILES}/${APPNAME}.log
-HOSTIP=$(hostname -i)
+#HOSTIP=$(hostname -i)
+#HOSTIP={{ ansible_default_ipv4.address }}
+HOSTIP={{ ansible_enp0s8.ipv4.address }}
 DATA_DIR={{ consul.data_dir }}
 OPTION=$1
 MODE=$2
@@ -43,12 +45,12 @@ start_bootstrap(){
    			echo "$APPNAME IS ALREADY RUNNING UNDER $PID"
 		else
 			rm -rf /var/consul/*
-			nohup ${COMMAND} agent -server -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
+			nohup ${COMMAND} agent -server -ui -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest -bootstrap-expect=2 > ${LOG} 2>&1 &
 			echo $! > ${PIDFILES}/${APPNAME}.pid
 		fi
 	else
 		rm -rf /var/consul/*
-                nohup ${COMMAND} agent -server -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
+                nohup ${COMMAND} agent -server -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest -bootstrap-expect=2 > ${LOG} 2>&1 &
                 echo $! > ${PIDFILES}/${APPNAME}.pid
 	fi
 	#nohup consul agent -server -data-dir=/var/consul -bind=192.168.33.10 -bootstrap-expect 3  &
