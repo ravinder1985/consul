@@ -1,9 +1,11 @@
 ---
 
-- name: GET CONSUL AGENT ZIP FILE 
-  get_url: url={{ consul.agent_zip }} dest={{ consul.dest }} validate_certs=False
-- name: UNZIP AND COPY THE BINERY TO /USR/BIN
-  unarchive: src={{ consul.dest }}{{ consul.agent_zip_name }} dest={{ consul.path }} copy=no
+#- name: GET CONSUL AGENT ZIP FILE 
+#  get_url: url={{ consul.zip }} dest={{ consul.dest }} validate_certs=False
+- name: COPY ZIP FILE
+  copy: src={{ consul.zip_name }} dest={{ consul.dest }} owner=consul group=consul mode=0755
+- name: UNZIP AND COPY THE BINERY TO /usr/bin
+  unarchive: src={{ consul.dest }}{{ consul.zip_name }} dest={{ consul.path }} copy=no
 - name: ADD CONSUL USER
   user: name=consul
 - name: CREATE DIR STRUCTURE
@@ -14,7 +16,7 @@
      - /etc/consul.d/server
      - /etc/consul.d/client
      - /var/consul
-- name: SERVER TEMPLATE FILES
+- name: BOOTSTRAP TEMPLATE FILES
   template: src=bootstrap_config.json dest=/etc/consul.d/bootstrap/config.json owner=consul group=consul mode=0755
 - name: SERVER TEMPLATE FILES
   template: src=server_config.json dest=/etc/consul.d/server/config.json owner=consul group=consul mode=0755
@@ -22,6 +24,7 @@
   template: src=client_config.json dest=/etc/consul.d/client/config.json owner=consul group=consul mode=0755
 - name: INIT SCRIPT
   template: src=script/init_consul.sh dest=/etc/consul.d/ mode=0755
+
 #- name: CHECK STATUS
 #  shell: /etc/consul.d/init_consul.sh status
 #  register: result
