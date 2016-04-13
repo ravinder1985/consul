@@ -2,3 +2,12 @@
 
 - name: START AS CLIENT
   shell: /etc/consul.d/init_consul.sh start client
+- name: RESTART REGISTRATOR IF EXIST
+  shell: docker restart registrator
+  register: result
+  ignore_errors: True
+#- name: print
+#  debug: msg="{{ result }}"
+- name: START REGISTRATOR
+  shell: docker run -d --name=registrator --net=host --volume=/var/run/docker.sock:/tmp/docker.sock gliderlabs/registrator:latest consul://localhost:8500
+  when: result.failed is defined

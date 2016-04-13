@@ -15,4 +15,5 @@
     - consul_server
 - hosts: client
   roles:
+    - docker
     - consul_client

@@ -1,0 +1,6 @@
+---
+# tasks file for docker
+
+- include: docker.yml
+  become: yes
+  become_method: sudo

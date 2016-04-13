@@ -1,7 +1,7 @@
 ---
 
 - name: host
-  debug: msg="{{ item }}"
+  debug: msg="{{ item }} {{ ansible_enp0s8.ipv4.address }}"
   with_items:
      - "{{ groups['server'] }}"
 #- name: GET CONSUL AGENT ZIP FILE 
