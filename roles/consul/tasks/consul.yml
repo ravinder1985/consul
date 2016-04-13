@@ -1,5 +1,9 @@
 ---
 
+- name: host
+  debug: msg="{{ item }}"
+  with_items:
+     - "{{ groups['server'] }}"
 #- name: GET CONSUL AGENT ZIP FILE 
 #  get_url: url={{ consul.zip }} dest={{ consul.dest }} validate_certs=False
 - name: COPY ZIP FILE
