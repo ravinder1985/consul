@@ -7,7 +7,9 @@
   with_items:
      - /home/consul
      - /home/consul/dest
-- name: GET CONSUL WEB ZIP FILE
-  get_url: url={{ consul_web.zip }} dest={{ consul_web.home }} validate_certs=False
+#- name: GET CONSUL WEB ZIP FILE
+#  get_url: url={{ consul_web.zip }} dest={{ consul_web.home }} validate_certs=False
+- name: COPY WEB ZIP FILE 
+  copy: src={{ consul_web.zip_name }} dest={{ consul_web.home }} owner=consul group=consul mode=0755
 - name: UNZIP AND COPY THE BINERY TO /home/consul/dest
   unarchive: src={{ consul_web.home }}{{ consul_web.zip_name }} dest={{ consul_web.dest }} copy=no 

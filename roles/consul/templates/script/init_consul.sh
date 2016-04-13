@@ -29,18 +29,6 @@ OPTION=$1
 MODE=$2
 export COMMAND PIDFILES APPNAME LOG HOSTIP OPTION MODE
 
-help(){
-	echo "Available options are as following"
-        echo "start bootstrap"
-        echo "start server"
-        echo "start client"
-        echo "restart bootstrap"
-        echo "restart server"
-        echo "restart client"
-        echo "status"
-        echo "stop"
-
-}
 start_bootstrap(){
 	if [ -f ${PIDFILES}/${APPNAME}.pid ]; then
                 PID=$(cat ${PIDFILES}/${APPNAME}.pid)
@@ -174,8 +162,6 @@ status(){
 	fi
 }
 
-
-echo ${MODE}
 case "$OPTION" in
 	start)
 		case "${MODE}" in
@@ -204,15 +190,7 @@ case "$OPTION" in
 		;;
 	*)
 		echo "WRONG OPTION [ ${OPTION} ]"
-		echo "Available options are as following"
-		echo "start bootstrap"
-		echo "start server"
-		echo "start client"
-		echo "restart bootstrap"
-		echo "restart server"
-		echo "restart client"
-		echo "status"
-		echo "stop"
+		help
 		exit 1
 esac
 exit 0
