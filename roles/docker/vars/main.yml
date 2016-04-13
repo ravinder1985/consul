@@ -1,0 +1,7 @@
+---
+# vars file for docker
+
+docker:
+  yum_repo: /etc/yum.repos.d/docker.repo
+  package: docker-engine
+  daemon: docker
