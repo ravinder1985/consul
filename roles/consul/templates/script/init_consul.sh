@@ -1,4 +1,5 @@
 #!/bin/bash
+# {{ groups.server }}
 
 help(){
         echo "Available options are as following"
@@ -25,9 +26,10 @@ APPNAME=consul
 LOGFILES=/var/log
 LOG=${LOGFILES}/${APPNAME}.log
 HOSTIP=$(hostname -i)
+DATA_DIR={{ consul.data_dir }}
 OPTION=$1
 MODE=$2
-export COMMAND PIDFILES APPNAME LOG HOSTIP OPTION MODE
+export COMMAND PIDFILES APPNAME LOG HOSTIP OPTION MODE DATA_DIR
 
 start_bootstrap(){
 	if [ -f ${PIDFILES}/${APPNAME}.pid ]; then
@@ -41,12 +43,12 @@ start_bootstrap(){
    			echo "$APPNAME IS ALREADY RUNNING UNDER $PID"
 		else
 			rm -rf /var/consul/*
-			nohup ${COMMAND} agent -server -data-dir=/var/consul -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
+			nohup ${COMMAND} agent -server -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
 			echo $! > ${PIDFILES}/${APPNAME}.pid
 		fi
 	else
 		rm -rf /var/consul/*
-                nohup ${COMMAND} agent -server -data-dir=/var/consul -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
+                nohup ${COMMAND} agent -server -data-dir=${DATA_DIR} -config-dir /etc/consul.d/bootstrap -bind=${HOSTIP} -bootstrap-expect=2 > ${LOG} 2>&1 &
                 echo $! > ${PIDFILES}/${APPNAME}.pid
 	fi
 	#nohup consul agent -server -data-dir=/var/consul -bind=192.168.33.10 -bootstrap-expect 3  &
@@ -65,12 +67,12 @@ start_server(){
                 	echo "$APPNAME IS ALREADY RUNNING UNDER $PID"
         	else
 			rm -rf /var/consul/*
-                	nohup ${COMMAND} agent -server -ui -data-dir=/var/consul -config-dir /etc/consul.d/server -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest > ${LOG} 2>&1 &
+                	nohup ${COMMAND} agent -server -ui -data-dir=${DATA_DIR} -config-dir /etc/consul.d/server -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest > ${LOG} 2>&1 &
                 	echo $! > ${PIDFILES}/${APPNAME}.pid
         	fi
 	else
 		rm -rf /var/consul/*
-		nohup ${COMMAND} agent -server -ui -data-dir=/var/consul -config-dir /etc/consul.d/server -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest > ${LOG} 2>&1 &
+		nohup ${COMMAND} agent -server -ui -data-dir=${DATA_DIR} -config-dir /etc/consul.d/server -bind=${HOSTIP} -client 0.0.0.0 -ui-dir=/home/consul/dest > ${LOG} 2>&1 &
                 echo $! > ${PIDFILES}/${APPNAME}.pid
 	fi
 	#nohup consul agent -server -ui --data-dir=/var/consul -bind=192.168.33.13 -client 0.0.0.0 -ui-dir=/home/consul/dist &
@@ -89,12 +91,12 @@ start_client(){
                 	echo "$APPNAME IS ALREADY RUNNING UNDER $PID"
         	else
 			rm -rf /var/consul/*
-                	nohup ${COMMAND} agent -data-dir=/var/consul -config-dir /etc/consul.d/client -bind=${HOSTIP} > ${LOG} 2>&1  &
+                	nohup ${COMMAND} agent -data-dir=${DATA_DIR} -config-dir /etc/consul.d/client -bind=${HOSTIP} > ${LOG} 2>&1  &
                 	echo $! > ${PIDFILES}/${APPNAME}.pid
 		fi
 	else
 		rm -rf /var/consul/*
-		nohup ${COMMAND} agent -data-dir=/var/consul -config-dir /etc/consul.d/client -bind=${HOSTIP} > ${LOG} 2>&1  &
+		nohup ${COMMAND} agent -data-dir=${DATA_DIR} -config-dir /etc/consul.d/client -bind=${HOSTIP} > ${LOG} 2>&1  &
                 echo $! > ${PIDFILES}/${APPNAME}.pid
         fi
 	#nohup consul agent -data-dir=/var/consul -bind=192.168.33.11 &
