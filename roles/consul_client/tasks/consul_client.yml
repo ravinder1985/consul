@@ -1,5 +1,11 @@
 ---
 
+- name: SERVICES TEMPLATE FILES
+  template: src=services.json dest=/etc/consul.d/client/ owner=consul group=consul mode=0755
+- name: DOCKER DAEMON MONITOR SCRIPT
+  template: src=docker.sh dest=/usr/local/bin/ mode=0755
+#- name: HTTPD DAEMON MONITOR SCRIPT
+#  template: src=httpd.sh dest=/usr/local/bin/ mode=0755
 - name: START AS CLIENT
   shell: /etc/consul.d/init_consul.sh start client
 - name: RESTART REGISTRATOR IF EXIST
