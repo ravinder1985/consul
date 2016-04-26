@@ -4,5 +4,5 @@
   template: src="docker.repo" dest={{ docker.yum_repo }}
 - name: INSTALL DOCKER ENGINE
   yum: name={{ docker.package }} update_cache=yes state=present
-- name: ENSURE SERVICE RUNNING
+- name: ENSURE DOCKER DAEMON RUNNING AND ENABLED
   service: name="{{ docker.daemon }}" state=started enabled=yes

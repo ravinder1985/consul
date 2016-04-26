@@ -1,0 +1,6 @@
+---
+# tasks file for consul_template
+
+- include: consul_template.yml
+  become: yes
+  become_method: sudo

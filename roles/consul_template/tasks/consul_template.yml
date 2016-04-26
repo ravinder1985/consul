@@ -1,0 +1,4 @@
+- name: COPY ZIP FILE
+  copy: src={{ consul_template.zip_name }} dest={{ consul_template.dest }} owner=consul group=consul mode=0755
+- name: UNZIP AND COPY THE BINERY TO /usr/bin
+  unarchive: src={{ consul_template.dest }}{{ consul_template.zip_name }} dest={{ consul_template.path }} copy=no

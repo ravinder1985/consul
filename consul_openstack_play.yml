@@ -1,0 +1,22 @@
+---
+
+- hosts: all_machines
+  roles:
+    - consul
+- hosts: all_machines
+  roles:
+    - consul_status
+- hosts: bootstrap
+  roles:
+    - consul_web
+    - { role: consul_bootstrap, tags: ["bootstrap"]}
+    - { role: consul_server, tags: ["server"]}
+- hosts: servers
+  roles:
+    - consul_web
+    - consul_server
+- hosts: clients
+  roles:
+    - docker
+    - consul_template
+    - consul_client

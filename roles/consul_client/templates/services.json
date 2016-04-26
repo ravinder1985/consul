@@ -1,0 +1,19 @@
+{
+  "services": [
+    {
+      "id": "docker",
+      "name": "docker",
+      "tags": [
+        "{{ ansible_hostname }}"
+      ],
+      "address": "{{ ansible_default_ipv4.address }}",
+      "port": 2375,
+      "checks": [
+        {
+          "script": "/usr/local/bin/docker.sh",
+          "interval": "5s"
+        }
+      ]
+    }
+  ]
+}

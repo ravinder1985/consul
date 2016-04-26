@@ -8,3 +8,5 @@
 - name: TEST
   debug:
     var: result
+- name: BOOTSTRAP SERVER
+  debug: msg="{{ groups.bootstrap }}"

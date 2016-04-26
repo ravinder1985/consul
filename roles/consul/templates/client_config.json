@@ -5,5 +5,5 @@
     "encrypt": "{{ consul.encrypt }}",
     "log_level": "INFO",
     "enable_syslog": true,
-    "start_join": ["{{ consul.bootstrap }}"]
+    "start_join": [{{ servers }}]
 }

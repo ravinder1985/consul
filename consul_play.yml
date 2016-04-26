@@ -7,7 +7,7 @@
 - hosts: allservers
   roles:
     - consul_status
-- hosts: bootstrap
+- hosts: bootstrap-
   roles:
     - consul_bootstrap
 - hosts: server
@@ -16,4 +16,5 @@
 - hosts: client
   roles:
     - docker
+    - consul_template
     - consul_client

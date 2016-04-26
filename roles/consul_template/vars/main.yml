@@ -1,0 +1,7 @@
+---
+# vars file for consul_template
+
+consul_template:
+  dest: /tmp/
+  zip_name: consul-template_0.14.0_linux_amd64.zip
+  path: /usr/bin
