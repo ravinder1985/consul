@@ -3,14 +3,13 @@ consul:
   dest: /tmp/
   zip_name: consul_0.6.4_linux_amd64.zip
   path: /usr/bin
-  bootstrap: 96.118.54.160
-  servers: '"96.118.54.160","96.118.55.223","96.118.55.224"'
+  servers: '"masterservers","masterservers,"masterservers"'
   datacenter: ndc_as_b
   data_dir: /var/consul
   encrypt: bd48o/p+p6OWNMmyLU7Ktg==
-  96.118.54.160:
-    servers: '"96.118.55.223","96.118.55.224"'
-  96.118.55.223:
-    servers: '"96.118.54.160","96.118.55.224"'
-  96.118.55.224:
-    servers: '"96.118.54.160,"96.118.55.223"'
+  master1_IP:
+    servers: '"master2_IP","master3_IP"'
+  master2_IP:
+    servers: '"master1_IP","master3_IP"'
+  master3_IP:
+    servers: '"master1_IP,"master2_IP"'
